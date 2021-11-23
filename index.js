@@ -77,7 +77,7 @@ displayPuzzle = function(){
 }
 
 createPuzzle = function(){
-    words.map((word)=>{
+    pFinalWords.map((word)=>{
         let i = 0;
         for(i;i<word.length;++i){
             pWords.add(word[i]);
