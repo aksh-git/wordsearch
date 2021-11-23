@@ -4,16 +4,17 @@ let board = document.getElementById("board");
 let message = document.getElementById("alert-txt");
 let grids = document.getElementsByClassName("grid-item");
 let scoreboard  = document.getElementById("scoreboard");
-//grid-items
+//grid-item
 let totalGrid = 25;
 let alphabets = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","W","X","Y","Z"];
+
 let pWords = new Set();
 let guessedWords = new Set();
-let words = ["HELLO","WORLD","AKASH","WORDS","GAME"];
-let greets = ["Bravo !!","You Got it.!","Awosome","Gotcha!!!","Yippee","Hooray!!"]
+let greets = ["Bravo !!","You Got it.!","Awosome","Gotcha!!!","Yippee","Hooray"]
 let pFinalWords;
-//API
+//API- key
 const APIURL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+
 //animations
 function slideUp() {
     var elem = document.getElementById("alert-bar");
@@ -32,6 +33,7 @@ function slideDown(msg) {
         slideUp();
     }, 1500);
 }
+
 //basic functions
 clearBoard = function(){
     board.value = "";
@@ -41,11 +43,12 @@ clearBoard = function(){
         elem[i].style.backgroundColor = "#d5d5d5";
     }
 }
+
 // API CALL
 async function checkForWordOnline(word) {
-	// API call
-    const response = await fetch(APIURL+word);
-    const raw_data = await response.json();
+	// api call
+	const response = await fetch(APIURL+word);
+	const raw_data = await response.json();
     if(!response.ok){
         slideDown("Word Not Found");
         clearBoard();
@@ -62,6 +65,7 @@ async function checkForWordOnline(word) {
         }
     }
 }  
+
 displayPuzzle = function(){
     let i = 0;
     while(i<totalGrid){
@@ -72,20 +76,14 @@ displayPuzzle = function(){
             insertItemGrid.value = pFinalWords[rGrid];
             ++i;
         }else{
-            continue;
+            continue
         }
     }
 }
 
 createPuzzle = function(){
-    words.map((word)=>{
-        let i = 0;
-        for(i;i<word.length;++i){
-            pWords.add(word[i]);
-        }
-    });
-    if(words.size<totalGrid){
-        while(words.size<totalGrid){
+    if(pWords.size<totalGrid){
+        while(pWords.size<totalGrid){
             let rWord = alphabets[Math.floor(Math.random()*26)];
             if(!pWords.has(rWord)){
                 pWords.add(rWord);
@@ -117,6 +115,7 @@ function newElement() {
     var inputValue = document.getElementById("board").value;
     var t = document.createTextNode(inputValue);
     li.appendChild(t);
+
     if (inputValue === '') {
       alert("You must write something!");
     } else {
