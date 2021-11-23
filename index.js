@@ -78,14 +78,14 @@ displayPuzzle = function(){
 }
 
 createPuzzle = function(){
-    pFinalWords.map((word)=>{
+    words.map((word)=>{
         let i = 0;
         for(i;i<word.length;++i){
             pWords.add(word[i]);
         }
     });
-    if( pFinalWords pFinalWords.size<totalGrid){
-        while(pFinalWords.size<totalGrid){
+    if(words.size<totalGrid){
+        while(words.size<totalGrid){
             let rWord = alphabets[Math.floor(Math.random()*26)];
             if(!pWords.has(rWord)){
                 pWords.add(rWord);
