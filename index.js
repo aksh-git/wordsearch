@@ -9,6 +9,7 @@ let totalGrid = 25;
 let alphabets = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","W","X","Y","Z"];
 let pWords = new Set();
 let guessedWords = new Set();
+let words = ["HELLO","WORLD","AKASH","WORDS","GAME"];
 let greets = ["Bravo !!","You Got it.!","Awosome","Gotcha!!!","Yippee","Hooray!!"]
 let pFinalWords;
 //API
@@ -83,8 +84,8 @@ createPuzzle = function(){
             pWords.add(word[i]);
         }
     });
-    if(pWords.size<totalGrid){
-        while(pWords.size<totalGrid){
+    if( pFinalWords pFinalWords.size<totalGrid){
+        while(pFinalWords.size<totalGrid){
             let rWord = alphabets[Math.floor(Math.random()*26)];
             if(!pWords.has(rWord)){
                 pWords.add(rWord);
