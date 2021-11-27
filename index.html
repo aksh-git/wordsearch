@@ -9,6 +9,9 @@
         <link rel="stylesheet" href="./index.css" />
     </head>
     <body>
+        <div class="mobile-bar" id="mobile-bar">
+            <button onclick="showScoreBoard()" value="showWords">Words</button>
+        </div>
         <center><br/><br/><span class="heading">Word Search</span></center>
         <div class="container">
             <div class="alert-bar" id="alert-bar">
@@ -47,13 +50,13 @@
                     <button onclick="handleClick(this.value,this)" class="grid-item" id="grid-item-24" value="1" >25</button>
                 </div>
                 <div class="p-footer">
-                    <button onclick="handleClick(this.value)" value="">Quit</button>
+                    <button onclick="handleClick(this.value)" value="reset">Reset</button>
                     <button onclick="handleClick(this.value)" value="submit" id="submit">Submit</button>
                     <button onclick="handleClick(this.value)" value="clear">clear</button>
                 </div>
             </div>
             <div class="scoreboard" id="scoreboard">
-                <div class="close" id="close">&angrt; Close</div>
+                <div onclick="showScoreBoard()" class="close" id="close">&angrt; Close</div>
                 <div class="sb-head">
                     <h2>Words Found</h2>
                 </div>
@@ -70,7 +73,7 @@
     <script>
         window.onload = function(){
             createPuzzle();
-            slideDown("Welcome to Word-Search");
+            slideDown("Welcome to Word-Search.")
         }
     </script>
     </body>
