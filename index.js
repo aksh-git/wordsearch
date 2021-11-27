@@ -68,7 +68,6 @@ async function checkForWordOnline(word) {
             slideDown("Word Found"+" "+greets[Math.floor(Math.random()*greets.length)]);
             newElement(word);
             wordCount.innerHTML = "Words Found : "+guessedWords.size;
-            console.log(guessedWords);
             clearBoard();
         }
         else{
