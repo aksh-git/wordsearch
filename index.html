@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="mobile-bar" id="mobile-bar">
-            <button onclick="showScoreBoard()" value="showWords">Words</button>
+            <button onclick="showScoreBoard()" value="showWords">Show Words</button>
         </div>
         <center><br/><br/><span class="heading">Word Search</span></center>
         <div class="container">
@@ -58,17 +58,18 @@
             <div class="scoreboard" id="scoreboard">
                 <div onclick="showScoreBoard()" class="close" id="close">&angrt; Close</div>
                 <div class="sb-head">
-                    <h2>Words Found</h2>
+                    <h2 id="sb-head-value">Words Found : 0</h2>
                 </div>
                 <div class="words-list" id="words-list">
                     <ul id="word-list">
                     </ul>
                 </div>
                 <div class="about" id="about">
-                    <p>Created by Akash ig_akash369</p>
+                    <p>Created by Akash @ig_akash369</p>
                 </div>
             </div>
         </div>
+        <div class="about-me" id="about-me">Created by Akash &copy; 2021</div>
     <script type="text/javascript" src="./index.js"></script>
     <script>
         window.onload = function(){
