@@ -1,9 +1,18 @@
-console.log("welcome to word Puzzle");
+console.log("welcome to word Search");
 //vars
 let board = document.getElementById("board");
 let message = document.getElementById("alert-txt");
 let grids = document.getElementsByClassName("grid-item");
 let scoreboard  = document.getElementById("scoreboard");
+let hourL = document.getElementById("hour");
+let minL = document.getElementById("min");
+let secL = document.getElementById("sec");
+let hr = 0;
+let min = 0;
+let sec = 0;
+
+//let date = newDate();
+
 //grid-item
 let totalGrid = 25;
 let wordLength = 9;
@@ -24,6 +33,7 @@ function slideUp() {
     message.innerHTML = "";
     elem.style.opacity=0;
 }
+
 function slideDown(msg) {
     var elem = document.getElementById("alert-bar");
     elem.style.opacity=1;
@@ -34,6 +44,7 @@ function slideDown(msg) {
         slideUp();
     }, 1500);
 }
+
 
 //basic functions
 clearBoard = function(){
@@ -46,11 +57,42 @@ clearBoard = function(){
     }
 }
 
+function addZero(i) {
+    if (i < 10) {i = "0" + i}
+    return i;
+}
+//timer
+function timer(){
+    sec = sec + 1;
+
+    sec = parseInt(sec);
+    min = parseInt(min);
+    hr = parseInt(hr);
+
+    if(sec==60) {
+        min = min + 1;
+        sec = 0;
+    }
+    if(min==60) {
+      hr = hr + 1;
+      min = 0;
+      sec = 0;
+    }
+    hourL.innerHTML=addZero(hr%12)+" :";
+    minL.innerHTML=addZero(min)+" :";
+    secL.innerHTML=addZero(sec);
+}
+
+setInterval(() => {
+    timer();
+}, 1000);
+
+
 showScoreBoard = function(){
-    if(scoreboard.style.opacity==1){
-        scoreboard.style.opacity=0;
+    if(scoreboard.style.display==="block"){
+        scoreboard.style.display="none";
     }else{
-        scoreboard.style.opacity=1;
+        scoreboard.style.display="block";
     }
 }
 
@@ -64,6 +106,7 @@ async function checkForWordOnline(word) {
         clearBoard();
     }else{
         if(raw_data.length>0){
+
             guessedWords.add(word);
             slideDown("Word Found"+" "+greets[Math.floor(Math.random()*greets.length)]);
             newElement(word);
@@ -72,10 +115,10 @@ async function checkForWordOnline(word) {
         }
         else{
             clearBoard();
+            console.log(raw_data);
         }
     }
 }  
-
 checkPuzzle = function(){
     let i=0;
     for(i=0;i<totalGrid;++i){
@@ -172,6 +215,7 @@ function newElement() {
     document.getElementById("board").value = "";
 }
 
+//handle clicks
 handleClick = function(val,e){
     if(val==="clear"){
         clearBoard();
@@ -202,3 +246,9 @@ handleClick = function(val,e){
         }
     }
 }
+
+//mouse click
+window.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+    checkForWord(board.value);
+})
