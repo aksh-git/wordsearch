@@ -58,6 +58,7 @@ showScoreBoard = function(){
 async function checkForWordOnline(word) {
 	const response = await fetch(APIURL+word);
 	const raw_data = await response.json();
+    let wordCount = document.getElementById("sb-head-value");
     if(!response.ok){
         slideDown("Word Not Found");
         clearBoard();
@@ -66,6 +67,8 @@ async function checkForWordOnline(word) {
             guessedWords.add(word);
             slideDown("Word Found"+" "+greets[Math.floor(Math.random()*greets.length)]);
             newElement(word);
+            wordCount.innerHTML = "Words Found : "+guessedWords.size;
+            console.log(guessedWords);
             clearBoard();
         }
         else{
@@ -163,7 +166,6 @@ function newElement() {
       document.getElementById("word-list").appendChild(li);
     }
     document.getElementById("board").value = "";
-    scoreboard.style.opacity=1;
 }
 
 handleClick = function(val,e){
