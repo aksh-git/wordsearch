@@ -6,13 +6,14 @@ let grids = document.getElementsByClassName("grid-item");
 let scoreboard  = document.getElementById("scoreboard");
 //grid-item
 let totalGrid = 25;
+let wordLength = 9;
 let alphabets = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","W","X","Y","Z"];
 let words = ["HELLO","WORLD","AKASH","WORDS","GAME"];
 let pWords = new Set();
 let guessedWords = new Set();
 let greets = ["Bravo !!","You Got it.!","Awosome","Gotcha!!!","Yippee","Hooray"]
 let pFinalWords;
-//API- key
+//API- URL
 const APIURL = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
 //animations
@@ -43,10 +44,8 @@ clearBoard = function(){
         elem[i].style.backgroundColor = "#d5d5d5";
     }
 }
-
 // API CALL
 async function checkForWordOnline(word) {
-	// Ajax call
 	const response = await fetch(APIURL+word);
 	const raw_data = await response.json();
     if(!response.ok){
@@ -66,8 +65,20 @@ async function checkForWordOnline(word) {
     }
 }  
 
+checkPuzzle = function(){
+    let i=0;
+    for(i=0;i<totalGrid;++i){
+        let insertItemGrid = document.getElementById("grid-item-"+i);
+        if(insertItemGrid.value==="undefined"){ 
+            let rGrid = Math.floor(Math.random() * totalGrid);
+            insertItemGrid.innerHTML = alphabets[rGrid];
+            insertItemGrid.value = alphabets[rGrid];
+        }
+    }
+}
+
+
 displayPuzzle = function(){
-    //let minGrids = pWords.size;
     let i = 0;
     while(i<totalGrid){
         let rGrid = Math.floor(Math.random() * totalGrid);
@@ -76,10 +87,25 @@ displayPuzzle = function(){
             insertItemGrid.innerHTML = pFinalWords[rGrid];
             insertItemGrid.value = pFinalWords[rGrid];
             ++i;
-        }else{
-            continue
         }
     }
+    checkPuzzle();
+}
+
+resetPuzzle = function(){
+    let i = 0;
+    let wordItem = document.querySelectorAll("li");
+    while(i<totalGrid){
+        let insertItemGrid = document.getElementById("grid-item-"+i);
+        insertItemGrid.innerHTML = i+1;
+        insertItemGrid.value = "1";
+        ++i;
+    }
+    wordItem.forEach((witem)=>{
+        witem.parentElement.removeChild(witem);
+    });
+    createPuzzle();
+    clearBoard();
 }
 
 createPuzzle = function(){
@@ -122,25 +148,12 @@ function newElement() {
     var inputValue = document.getElementById("board").value;
     var t = document.createTextNode(inputValue);
     li.appendChild(t);
-
     if (inputValue === '') {
       alert("You must write something!");
     } else {
       document.getElementById("word-list").appendChild(li);
     }
     document.getElementById("board").value = "";
-    //var span = document.createElement("SPAN");
-    //var txt = document.createTextNode("\u00D7");
-    //span.className = "close";
-    //span.appendChild(txt);
-    //li.appendChild(span);
-  
-    //for (i = 0; i < close.length; i++) {
-    //  close[i].onclick = function() {
-    //    var div = this.parentElement;
-    //    div.style.display = "none";
-    //  }
-    //}
     scoreboard.style.opacity=1;
 }
 
@@ -148,18 +161,22 @@ handleClick = function(val,e){
     if(val==="clear"){
         clearBoard();
     }
-    else if(val==="create"){
-        createPuzzle();
+    else if(val==="reset"){
+        resetPuzzle();
     }else if(val==="submit"){   
         checkForWord(board.value);
     }else{
-        if(board.value.length<8){
+        if(board.value.length<wordLength){
             if(e.style.background.includes("limegreen")){
                 e.style.background="";
                 board.value = board.value.replace(val,"");
             }else{
                 board.value += val;
                 e.style.background="limegreen";
+            }
+            if(e.style.background.includes("limegreen")&&board.value.length>=wordLength){
+                e.style.background="";
+                board.value = board.value.replace(val,"");
             }
         }
     }
