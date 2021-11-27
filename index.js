@@ -40,10 +40,20 @@ clearBoard = function(){
     board.value = "";
     let elem = document.getElementsByClassName("grid-item");
     var i;
-    for (i = 0; i < elem.length; i++) {
-        elem[i].style.backgroundColor = "#d5d5d5";
+    for (i=0;i<elem.length;i++) {
+        elem[i].style.background = "none";
+        elem[i].style.color = "#f9f9f9";
     }
 }
+
+showScoreBoard = function(){
+    if(scoreboard.style.opacity==1){
+        scoreboard.style.opacity=0;
+    }else{
+        scoreboard.style.opacity=1;
+    }
+}
+
 // API CALL
 async function checkForWordOnline(word) {
 	const response = await fetch(APIURL+word);
@@ -60,7 +70,6 @@ async function checkForWordOnline(word) {
         }
         else{
             clearBoard();
-            console.log(raw_data);
         }
     }
 }  
@@ -160,22 +169,28 @@ function newElement() {
 handleClick = function(val,e){
     if(val==="clear"){
         clearBoard();
-    }
-    else if(val==="reset"){
+    }else if(val==="showWords"){
+        showScoreBoard();
+    }else if(val==="reset"){
         resetPuzzle();
     }else if(val==="submit"){   
         checkForWord(board.value);
+    }else if(val==="showWords"){
+        
     }else{
         if(board.value.length<wordLength){
-            if(e.style.background.includes("limegreen")){
-                e.style.background="";
+            if(e.style.background.includes("rgb(153, 230, 153)")){
+                e.style.background="none";
+                e.style.color="#f9f9f9";
                 board.value = board.value.replace(val,"");
             }else{
                 board.value += val;
-                e.style.background="limegreen";
+                e.style.background="#99e699";
+                e.style.color="limegreen";
             }
-            if(e.style.background.includes("limegreen")&&board.value.length>=wordLength){
-                e.style.background="";
+            if(e.style.background.includes("rgb(153, 230, 153)") && board.value.length>=wordLength){
+                e.style.background="none";
+                e.style.color="#f9f9f9";
                 board.value = board.value.replace(val,"");
             }
         }
