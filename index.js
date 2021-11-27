@@ -116,6 +116,11 @@ resetPuzzle = function(){
     wordItem.forEach((witem)=>{
         witem.parentElement.removeChild(witem);
     });
+    for(let i of guessedWords){
+        guessedWords.delete(i);
+    }
+    let wordCount = document.getElementById("sb-head-value");
+    wordCount.innerHTML = "Words Found : "+guessedWords.size;
     createPuzzle();
     clearBoard();
 }
