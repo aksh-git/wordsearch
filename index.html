@@ -12,12 +12,18 @@
         <div class="mobile-bar" id="mobile-bar">
             <button onclick="showScoreBoard()" value="showWords">Show Words</button>
         </div>
+        <div class="word-timer" id="word-timer">
+            <div class="word-timer-text">
+                <span class="hour" id="hour">00 :</span>
+                <span class="min" id="min">00 :</span>
+                <span class="sec" id="sec">00</span>
+            </div>
+        </div>
         <center><br/><br/><span class="heading">Word Search</span></center>
         <div class="container">
             <div class="alert-bar" id="alert-bar">
                 <span id="alert-txt"></span>
             </div>
-            
             <div class="puzzle">
                 <div class="p-head">
                     <input disabled id="board" max="8" placeholder="Click to select"></input>
@@ -65,11 +71,12 @@
                     </ul>
                 </div>
                 <div class="about" id="about">
-                    <p>Created by Akash @ig_akash369</p>
+                    <p>Created by Akash </p>
                 </div>
             </div>
         </div>
         <div class="about-me" id="about-me">Created by Akash &copy; 2021</div>
+        <canvas id="canvas"></canvas>
     <script type="text/javascript" src="./index.js"></script>
     <script>
         window.onload = function(){
