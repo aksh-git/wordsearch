@@ -246,9 +246,7 @@ handleClick = function(val,e){
                 e.style.color="#f9f9f9";
                 board.value = board.value.replace(val,"");
             }
-        }else{
-	   slideDown("Maximum can select "+wordLength);
-	}
+        }
     }
 }
 
