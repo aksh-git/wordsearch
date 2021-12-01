@@ -211,7 +211,7 @@ function newElement() {
     var t = document.createTextNode(inputValue);
     li.appendChild(t);
     if (inputValue === '') {
-      alert("You must write something!");
+      //alert("You must write something!");
     } else {
       document.getElementById("word-list").appendChild(li);
     }
@@ -246,7 +246,9 @@ handleClick = function(val,e){
                 e.style.color="#f9f9f9";
                 board.value = board.value.replace(val,"");
             }
-        }
+        }else{
+	   slideDown("Maximum can select "+wordLength);
+	}
     }
 }
 
