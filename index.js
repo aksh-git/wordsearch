@@ -168,6 +168,7 @@ resetPuzzle = function(){
     hr = 0;
     min = 0;
     sec = 0;
+    slideDown("Reset Done. Start Hunting words.");
 }
 
 createPuzzle = function(){
