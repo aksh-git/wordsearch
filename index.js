@@ -165,6 +165,9 @@ resetPuzzle = function(){
     wordCount.innerHTML = "Words Found : "+guessedWords.size;
     createPuzzle();
     clearBoard();
+    hr = 0;
+    min = 0;
+    sec = 0;
 }
 
 createPuzzle = function(){
